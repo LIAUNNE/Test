@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>CMB</title>
+    <!-- 新 Bootstrap 核心 CSS 文件 -->
+    <!--<<link href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">-->
+
+
+    <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+<!--   <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script> -->
+<!-- <script src="js/jquery-3.0.0.js" type="application/javascript"></script> -->
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <!--<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>-->
+    <script src="js/cmb.js"></script>
+                 <script type="text/javascript">
+         $.ajax({
+            type:"post",
+            url:"User/Check.do",
+            async:true,
+            error:function(){
+            	$("#test").html("111111");
+            }
+            ,success:function (data) {
+            	var jo = JSON.parse(data);
+                if(jo.status==true){
+                    $("#login").attr("href","User/out.do"); 
+                    $("#login-span").html("注销");
+                }else{
+                	$("#login").attr("href","login.html"); 
+                }
+            }
+        }); 
+    </script>
+<!--     <script type="text/javascript">
+         $.ajax({
+            type:"post",
+            url:"http://localhost:8080/CMB-Test/User/Check.do",
+            async:true,
+            success:function (data) {
+            	alert(data);
+                if(data== "true"){
+                   // $("#login").href = "http://localhost:8080/CMB-Test/User/out.do";
+                    document.getElementById("login-span").innerText="注销";
+                    alert("nnn");
+                }else{
+                    alert("应该显示这里");
+                }
+            }
+        }); 
+    	$.ajax({
+    		type:"post",
+    		url:"http://localhost:8080/CMB-Test/User/Check.do",
+    		datatype:"String",
+    		async:true,
+    		success:function(data){
+    			alert(data);
+    		}
+    	});
+    </script> -->
+    <!-- 导航条高度 -->
+    <style type="text/css">
+        .navbar-nav > li > a {
+            padding-top: 60px;
+            height: 94px;
+            font-size: 18px;
+            padding-left: 47px;
+        }
+
+        .navbar {
+            min-height: 84px;
+            padding-bottom: 0px;
+            margin-bottom: 0px;
+            border-radius: 0px;
+        }
+
+        .chen {
+            padding-top: 0px;
+            height: 94px;
+            font-size: 18px;
+            padding-left: 0px;
+        }
+
+        .ul {
+            list-style: none;
+            margin-top: 31px;
+        }
+
+        .ul li {
+            display: inline-block;
+            width: 200px;
+        }
+
+        .ul li a:link {
+            font-size: 14px;
+            line-height: 24px;
+            font-weight: 500;
+            color: #333333;
+            text-decoration: none;
+        }
+
+        .ul li a:hover {
+            font-size: 14px;
+            line-height: 24px;
+            font-weight: 500;
+            color: #1e8bd4;
+            text-decoration: none;
+        }
+
+        .ul-img {
+            list-style: none;
+            margin-top: 31px;
+        }
+
+        .ul-img li {
+            display: inline-block;
+            width: 240px;
+        }
+
+        .ul-img a:hover {
+            text-decoration: none;
+        }
+
+        .top-a:active {
+            color: #675e59;
+            text-decoration: underline;
+        }
+			.ul li a:visited {
+				font-size: 14px;
+				line-height: 24px;
+				font-weight: 500;
+				color: #333333;
+				text-decoration: none;
+			}
+        .top-a:link {
+            color: #675e59;
+            text-decoration: none;
+        }
+
+        .li-img {
+            width: 219px;
+            height: 120px;
+        }
+
+        .span-1 {
+            font-size: 15px;
+            margin: 2px;
+            color: #333;
+        }
+
+        .span-2 {
+            width: 200px;
+        }
+    </style>
+</head>
+
+<body>
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand"><img style="width: 259px; height: 64px;" alt="Brand"
+                                                  src="img/微信截图_20190104164347.png"></a>
+            <a class="navbar-brand" href="main.html"><img style="width: 259px; height: 64px;" alt="Brand"
+                                                  src="img/mercedes-benz-logo-desktop.png"></a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+            <ul class="nav navbar-nav" style="text-align:center;">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="collapse" onclick="nishuo(1)">
+                        车型 <b class="caret"></b>
+                    </a>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="collapse" onclick="nishuo(2)">
+                        购车指南 <b class="caret"></b>
+                    </a>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="collapse" onclick="nishuo(3)">
+                        客户服务 <b class="caret"></b>
+                    </a>
+                </li>
+            </ul>
+
+            <ul class="nav navbar-nav navbar-right chen">
+                <li>
+                    <a id="login" href="#"><span id="login-span">登陆</span></a>
+                </li>
+                <li>
+                    <a href="regist.html">注册</a>
+                </li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container-fluid -->
+</nav>
+
+<div id="chexin" class="collapse out">
+    <div class="col-md-offset-2">
+        <div>
+            <h1 style="margin-top: 35px;">所有车型</h1>
+            <ul style="list-style: none;margin-top: 25px;">
+                <li style="font-size:18px;width:100px; display: inline-block;" data-toggle="collapse"
+                    onclick="nishuo(4)">轿车
+                </li>
+                <li style="font-size:18px;width:100px;display: inline-block;" data-toggle="collapse"
+                    onclick="nishuo(5)">SUV
+                </li>
+                <li style="font-size:18px;width:150px;display: inline-block;" data-toggle="collapse"
+                    onclick="nishuo(6)">轿跑车 & 敞篷跑车
+                </li>
+            </ul>
+        </div>
+        <div id="jiaoche" class="collapse in">
+            <ul class="ul">
+                <li><span style="font-size: 30px;">S </span>级</li>
+                <li><span style="font-size: 30px;">E </span>级</li>
+                <li><span style="font-size: 30px;">C </span>级</li>
+                <li><span style="font-size: 30px;">A </span>级</li>
+            </ul>
+            <ul class="ul">
+                <li>
+                    <a href="jiaos1.html">S级驾车<br>¥ 86.38 万起</a>
+                </li>
+                <li>
+                    <a href="jiaoe1.html">长轴距E级轿车<br>¥ 43.58 万起</a>
+                </li>
+                <li>
+                    <a href="jiaoc1.html">新一代长轴距C级运动轿车<br>¥ 31.58 万起</a>
+                </li>
+                <li>
+                    <a href="jiaoa1.html">全新长轴距A级轿车<br>¥ 21.69 万起</a>
+                </li>
+            </ul>
+            <ul class="ul">
+                <li>
+                    <a href="jiaos2.html">梅赛德斯-迈巴赫S级轿车<br>¥ 140.88 万起</a>
+                </li>
+                <li>
+                    <a href="#">长轴距E级运动轿车<br>¥ 43.58 万起</a>
+                </li>
+                <li>
+                    <a href="#">新一代标准轴距C级车运动版<br>¥ 31.88 万起</a>
+                </li>
+                <li>
+                    <a href="#">A级车<br>¥ 21.98 万起</a>
+                </li>
+            </ul>
+            <ul class="ul">
+                <li>
+                    <a href="jiaos1.html">S级轿车 尊贵版<br>¥ 94.88 万起</a>
+                </li>
+                <li>
+                    <a href="#">标准轴距E级车运动版<br>¥ 43.58 万起</a>
+                </li>
+                <li>
+                    <a href="#">新一代长轴距C级轿车<br>¥ 32.38 万起</a>
+                </li>
+                <li>
+                    <a href="#">梅赛德斯-AMG A 45 4MATIC<br>¥ 46.88 万起</a>
+                </li>
+            </ul>
+            <ul class="ul">
+                <li>
+                    <a href="#"><br></a>
+                </li>
+                <li>
+                    <a href="#">梅赛德斯-AMG E 43 4MATIC特别版<br>¥ 91.88 万起</a>
+                </li>
+                <li>
+                    <a href="#"><br></a>
+                </li>
+                <li>
+                    <a href="#"><br></a>
+                </li>
+            </ul>
+            <ul class="ul">
+                <li>
+                    <a href="#"><br></a>
+                </li>
+                <li>
+                    <a href="#">梅赛德斯-AMG E 63 S 4MATIC+特别版<br>¥ 91.88 万起</a>
+                </li>
+                <li>
+                    <a href="#"><br></a>
+                </li>
+                <li>
+                    <a href="#"><br></a>
+                </li>
+            </ul>
+        </div>
+        <div id="SUV" class="collapse out">
+            <ul class="ul">
+                <li><span style="font-size: 30px;">G </span>级</li>
+                <li><span style="font-size: 30px;">GLS </span></li>
+            </ul>
+            <ul class="ul">
+                <li>
+                    <a href="全新G级越野车.html">全新G级越野车<br>¥ 158.88 万起</a>
+                </li>
+                <li>
+                    <a href="全新梅赛德斯-AMG G 63.html">全新梅赛德斯-AMG G 63<br>¥ 219.88 万起</a>
+                </li>
+            </ul>
+            <ul class="ul">
+                <li>
+                    <a href="#">GLS SUV<br>¥ 95.68 万起</a>
+                </li>
+                <li>
+                    <a href="梅赛德斯-AMG GLS 63 4MATIC.html">梅赛德斯-AMG GLS 63 4MATIC<br>¥ 184.68 万起</a>
+                </li>
+            </ul>
+            <br>
+
+        </div>
+        <div id="paoche" class="collapse out">
+            <ul class="ul">
+                <li><span style="font-size: 30px;">CLS </span></li>
+                <li><span style="font-size: 30px;">E </span>级</li>
+            </ul>
+            <ul class="ul">
+                <li>
+                    <a href="CLS四门轿跑车.html">CLS四门轿跑车<br>¥ 95.68 万起</a>
+                </li>
+                <li>
+                    <a href="E级轿跑车.html">E级轿跑车<br>¥ 52.88 万起</a>
+                </li>
+            </ul>
+            <ul class="ul">
+                <li>
+                    <a href="#"><br></a>
+                </li>
+                <li>
+                    <a href="#">E级敞篷轿跑车<br>¥ 64.88 万起</a>
+                </li>
+            </ul>
+            <br>
+        </div>
+    </div>
+</div>
+<div id="gouche" class="collapse out">
+    <div class="col-md-offset-2">
+        <div>
+            <h1 style="margin-top: 35px;">购车指南</h1>
+            <ul class="ul-img">
+                <li>
+                    <a>
+                        <img class="li-img" src="img/1.jpg"/>
+                        <br/><br/><span class="span-1">放开活 自由享</span>
+                        <br/><span class="span-2">购买新生代车型，可享多重优享方案，释放自我，放开活！</span>
+                    </a>
+                </li>
+                <li>
+                    <a>
+                        <img class="li-img" src="img/2.jpeg"/>
+                        <br/><br/><span class="span-1">心意所属，远行相伴</span>
+                        <br/><span class="span-2">在线预订GLE SUV、GLE轿跑三者任意一款，赠精品好礼。</span>
+                    </a>
+                </li>
+                <li>
+                    <a>
+                        <img class="li-img" src="img/3.jpeg"/>
+                        <br/><br/><span class="span-1">如愿之旅，随享好礼</span>
+                        <br/><span class="span-2">在线订购梅赛德斯-AMG GLE 43 4MATIC，赠精品好礼！</span>
+                    </a>
+                </li>
+                <li>
+                    <a>
+                        <img class="li-img" src="img/4.jpg"/>
+                        <br/><br/><span class="span-1">限时购车新方案</span>
+                        <br/><span class="span-2">提供人性化的选车和购车方案，让购车体验更多元，更轻松。</span>
+                    </a>
+                </li>
+            </ul>
+            <ul class="ul-img">
+                <li>
+                    <a>
+                        <img class="li-img" src="img/5.png"/>
+                        <br/><br/><span class="span-1">查找经销商</span>
+                        <br/><span class="span-2">根据服务项目及贩售车型，筛选出符合您需求的经销商。</span>
+                    </a>
+                </li>
+                <li>
+                    <a>
+                        <img class="li-img" src="img/6.png"/>
+                        <br/><br/><span class="span-1">金融计算器</span>
+                        <br/><span class="span-2">提供各种弹性购车的新方案，您可以根据预算来进行试算。</span>
+                    </a>
+                </li>
+                <li>
+                    <a>
+                        <img class="li-img" src="img/7.png"/>
+                        <br/><br/><span class="span-1">预约试驾</span>
+                        <br/><span class="span-2">选择您心仪的车型，联系经销商，即刻体验梅赛德斯-奔驰。</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <br/>
+</div>
+<div id="kehu" class="collapse out">
+    <div class="col-md-offset-2">
+        <div>
+            <h1 style="margin-top: 35px;">客户服务</h1>
+            <ul class="ul-img">
+                <li>
+                    <a>
+                        <img class="li-img" src="img/8.jpg"/>
+                        <br/><br/><span class="span-1">最新活动信息</span>
+                        <br/><span class="span-2">丰富多彩的活动让车主安然悠享用车生活，与爱车共度的美好时光。</span>
+                    </a>
+                </li>
+                <li>
+                    <a>
+                        <img class="li-img" src="img/9.jpg"/>
+                        <br/><br/><span class="span-1">车辆保养与维修</span>
+                        <br/><span class="span-2">关注车主用车期间不同阶段的需求，提供高效愉悦的移动出行解决方案。</span>
+                    </a>
+                </li>
+                <li>
+                    <a>
+                        <img class="li-img" src="img/10.jpg"/>
+                        <br/><br/><span class="span-1">Mercedes me 车主俱乐部</span>
+                        <br/><span class="span-2">携手跨行业合作伙伴为会员打造优质的用车体验和多方位的生活关怀。</span>
+                    </a>
+                </li>
+                <li>
+                    <a>
+                        <img class="li-img" src="img/11.jpg"/>
+                        <br/><br/><span class="span-1">金融服务</span>
+                        <br/><span class="span-2">选择奔驰金融，轻松拥享梦想星徽座驾。</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <br/>
+</div>
+
+</body>
+
+</html>

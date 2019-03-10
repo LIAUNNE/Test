@@ -1,0 +1,18 @@
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.ICarDao">
+	<select id="selectCarConfigByModel" parameterType="String" resultType="CarConfig">
+		select * from CarConfig where info_model=#{model};
+	</select>
+	<select id="selectProductByModel" parameterType="String" resultType="ProductInfo">
+		select * from productinfo where info_model=#{model};
+	</select>
+	<select id="selectOrderById" parameterType="int" resultType="CarOrder">
+		select * from CarOrder where order_id=#{order_id};
+	</select>
+	<insert id="createOrder" parameterType="CarOrder">
+		insert into 
+		carorder values(#{user_id},#{order_id},#{order_model},#{product_money},#{product_agency});
+	</insert>
+</mapper>

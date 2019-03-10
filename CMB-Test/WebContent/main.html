@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>CMB商场首页</title>
+    <!-- 新 Bootstrap 核心 CSS 文件 -->
+    <link href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <!--
+            jQuery文件。务必在bootstrap.min.js 之前引入
+            <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script> -->
+
+    <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <script>
+        $(function () {
+            $("#included").load("top.html");
+/*             $.ajax({
+            type:"post",
+            url:"User/Check.do",
+            async:true,
+           
+            error:function(){
+            	$("#test").html("111111");
+            }
+            ,success:function (data) {
+            	alert(data);
+            	var jo = JSON.parse(data);
+            	alert(jo.status);
+                if(jo.status==true){
+                    $("#login").href = "User/out.do";
+                    $("#login-span").html("注销");
+                    alert("nnn");
+                }else{
+                    alert("应该显示这里");
+                }
+            }
+        });  */
+        });
+    </script>
+   
+    <!--<script>
+        $(function(){
+            var includes = $('[data-include]');
+            jQuery.each(includes, function(){
+                var file = $(this).data('include') + '.html';
+                $(this).load(file);
+            });
+        });
+    </script>-->
+</head>
+
+<body>
+<div id="included"></div>
+<!--<div data-include="top"></div>-->
+
+<!-- 16:9 aspect ratio -->
+<!--<div class="embed-responsive embed-responsive-16by9">
+<iframe src="top.html" class="embed-responsive-item" scrolling="no" ><p>your browser isn't support iframe structure</p></iframe>
+</div>-->
+
+<div id="myCarousel" class="carousel slide">
+    <!-- 轮播（Carousel）指标 -->
+    <ol class="carousel-indicators">
+        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+        <li data-target="#myCarousel" data-slide-to="1"></li>
+        <li data-target="#myCarousel" data-slide-to="2"></li>
+    </ol>
+    <!-- 轮播（Carousel）项目 -->
+    <div class="carousel-inner">
+        <div class="item active">
+            <img style="width: 100%;" src="img/kv-pc.jpg" alt="First slide">
+        </div>
+        <div class="item">
+            <img style="width: 100%;" src="img/CLSKV.jpg" alt="Second slide">
+        </div>
+        <div class="item">
+            <img style="width: 100%;" src="img/AMG-GLE-43-KV.jpg" alt="Third slide">
+        </div>
+        <!-- 轮播（Carousel）导航 -->
+        <a class="carousel-control left" href="#myCarousel" data-slide="prev"> <span _ngcontent-c3="" aria-hidden="true"
+                                                                                     class="glyphicon glyphicon-chevron-left"></span></a>
+        <a class="carousel-control right" href="#myCarousel" data-slide="next"> <span _ngcontent-c3=""
+                                                                                      aria-hidden="true"
+                                                                                      class="glyphicon glyphicon-chevron-right"></span></a>
+    </div>
+</div>
+<!--<script src="js/cmb.js"></script>-->
+<div id="test"></div>
+</body>
+             <script type="text/javascript">
+
+    </script>
+</html>

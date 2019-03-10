@@ -1,0 +1,78 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+         http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+
+    <!-- <context:component-scan base-package="com.Bean"/> -->
+    <!-- 注册属性文件-->
+    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+    <property name="Location" value="classpath:database.properties"/>
+    </bean> 
+    
+    <!-- 配置阿里数据源 -->
+    <bean id="myDataSource" class="com.alibaba.druid.pool.DruidDataSource">
+    <property name="driverClassName" value="${jdbc.driver}"/>
+	<property name="url" value="${jdbc.url}"/>
+	<property name="username" value="${jdbc.user}"/>
+	<property name="password" value="${jdbc.password}"/>
+    </bean>
+    
+    <!-- 注册SqlSessionFactory的Bean -->
+    <bean id="MySqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+    <!-- 指定mybatis主配置文件位置 -->
+    <property name="configLocation" value="classpath:mybatis-config.xml"/>
+    <property name="dataSource" ref="myDataSource"/>
+    </bean>
+    
+    <!-- 生成IUserDao代理对象 -->
+    <bean id="IUserDao" class="org.mybatis.spring.mapper.MapperFactoryBean">
+    	<property name="sqlSessionFactory" ref="MySqlSessionFactory"/>
+    	<!-- 指定映射接口 -->
+    	<property name="mapperInterface" value="com.dao.IUserDao"/>
+    </bean>
+    
+    <!-- 注册Userservice -->
+    <bean id="UserService" class="com.Service.Impl.UserServiceImpl">
+    	<property name="dao" ref="IUserDao"/>
+    </bean>
+    
+    <!-- 生成ICarDao代理对象 -->
+    <bean id="ICarDao" class="org.mybatis.spring.mapper.MapperFactoryBean">
+    	<property name="sqlSessionFactory" ref="MySqlSessionFactory"/>
+    	<!-- 指定映射接口 -->
+    	<property name="mapperInterface" value="com.dao.ICarDao"/>
+    </bean>
+    
+        <!-- 注册Carservice -->
+    <bean id="CarService" class="com.Service.Impl.CarServiceImpl">
+    	<property name="dao" ref="ICarDao"/>
+    </bean>
+    
+	<!--     注册事务管理器-->
+	<bean id="myTransactionManager"
+	class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+	<property name="dataSource" ref="myDataSource"/>
+	</bean> 
+<!--     注册事务通知
+	<tx:adviceid="txAdvice" transaction-manager="myTransactionManager">
+	<tx:attributes>
+	<tx:methodname="add*" isolation="DEFAULT" propagation="REQUIRED"/>
+	</tx:attributes>
+	</tx:advice> -->
+	<!-- aop配置 -->
+<!-- 	<aop:config>
+	<aop:pointcutexpression="execution(* com.neu.service.*.*(..))"
+	id="myPointcut"/>
+	<aop:advisoradvice-ref="txAdvice" pointcut-ref="myPointcut"/>
+	</aop:config> -->
+    
+    <context:component-scan base-package="com.aspect" />
+	<context:component-scan base-package="com.Service" />
+	<aop:aspectj-autoproxy/>
+</beans>
